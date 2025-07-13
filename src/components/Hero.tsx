@@ -1,22 +1,35 @@
 
 import { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useAnimation, useTransform } from 'framer-motion';
 import { Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+
 
 const Hero = () => {
   const [text, setText] = useState('');
   const fullText = 'Full Stack Developer | Flutter | React | .NET';
-  
+  const [extraDots, setExtraDots] = useState<number[]>([]);
+  const handleSparkClick = () => {
+    const sparkCount = 10;
+    const newSparkIds = Array.from({ length: sparkCount }, () => Date.now() + Math.random());
+    setExtraDots((prev) => [...prev, ...newSparkIds]);
+
+    // Remove them after 1.5s
+    setTimeout(() => {
+      setExtraDots((prev) => prev.filter((id) => !newSparkIds.includes(id)));
+    }, 1500);
+  };
+
   // Mouse interaction values
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-300, 300], [30, -30]);
   const rotateY = useTransform(x, [-300, 300], [-30, 30]);
-  
+
   const springX = useSpring(rotateX);
   const springY = useSpring(rotateY);
-  
+
   useEffect(() => {
     let index = 0;
     const timer = setInterval(() => {
@@ -27,7 +40,7 @@ const Hero = () => {
         clearInterval(timer);
       }
     }, 80);
-    
+
     return () => clearInterval(timer);
   }, []);
 
@@ -44,14 +57,33 @@ const Hero = () => {
     y.set(0);
   };
 
+  const nameControls = useAnimation();
+
+  const startRotation = () => {
+    nameControls.start({
+      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+      transition: {
+        duration: .3,
+        repeat: Infinity,
+        ease: "linear" // smoother & consistent rotation
+      }
+    });
+  };
+
+  const stopRotation = () => {
+    nameControls.stop();
+  };
+
+
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 pb-20">
       {/* Lighter gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
-      
+
       {/* Enhanced floating particles with purple theme */}
-      <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+      <div className="absolute inset-0" onClick={handleSparkClick}>
+        {[...Array(20), ...extraDots].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-purple-400 rounded-full"
@@ -73,7 +105,7 @@ const Hero = () => {
               ]
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: Math.random() * 2 + 1,
               repeat: Infinity,
               delay: Math.random() * 2,
               ease: "easeInOut"
@@ -82,7 +114,8 @@ const Hero = () => {
         ))}
       </div>
 
-      <div 
+
+      <div
         className="container mx-auto px-6 text-center relative z-10"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -95,18 +128,18 @@ const Hero = () => {
           }}
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ 
-            duration: 1, 
-            type: "spring", 
+          transition={{
+            duration: 1,
+            type: "spring",
             stiffness: 100,
             damping: 15
           }}
           className="mb-8"
         >
           <div className="relative w-64 h-64 mx-auto perspective-1000">
-            <motion.div 
+            <motion.div
               className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-              animate={{ 
+              animate={{
                 scale: [1, 1.02, 1],
                 rotate: [0, 360]
               }}
@@ -128,8 +161,8 @@ const Hero = () => {
         <motion.h1
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ 
-            delay: 0.3, 
+          transition={{
+            delay: 0.3,
             duration: 0.6,
             type: "spring",
             stiffness: 100
@@ -137,20 +170,38 @@ const Hero = () => {
           className="text-6xl md:text-8xl font-bold mb-6"
         >
           {/* Dark shade on name text */}
-          <span className="bg-gradient-to-r from-gray-300 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
-            DHRUVIK
-          </span>
-          <br />
-          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
-            GALANI
-          </span>
+          <motion.h2
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.2, type: "spring", stiffness: 50 }}
+            className="text-6xl md:text-8xl font-bold mb-6"
+          >
+            <motion.span
+              className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-[length:200%_200%] bg-clip-text text-transparent drop-shadow-lg transition-all duration-300"
+              onMouseEnter={startRotation}
+              onMouseLeave={stopRotation}
+              animate={nameControls}
+            >
+              DHRUVIK
+            </motion.span>
+            <br />
+            <motion.span
+              className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-[length:200%_200%] bg-clip-text text-transparent drop-shadow-lg transition-all duration-300"
+              onMouseEnter={startRotation}
+              onMouseLeave={stopRotation}
+              animate={nameControls}
+            >
+              GALANI
+            </motion.span>
+          </motion.h2>
+
         </motion.h1>
 
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ 
-            delay: 0.6, 
+          transition={{
+            delay: 0.6,
             duration: 0.6,
             type: "spring",
             stiffness: 80
@@ -166,8 +217,8 @@ const Hero = () => {
         <motion.div
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ 
-            delay: 0.9, 
+          transition={{
+            delay: 0.9,
             duration: 0.6,
             type: "spring",
             stiffness: 60
@@ -175,7 +226,7 @@ const Hero = () => {
           className="flex items-center justify-center space-x-6"
         >
           <motion.div
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               rotateY: 10,
               z: 50
@@ -192,9 +243,9 @@ const Hero = () => {
               GitHub
             </Button>
           </motion.div>
-          
+
           <motion.div
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               rotateY: -10,
               z: 50

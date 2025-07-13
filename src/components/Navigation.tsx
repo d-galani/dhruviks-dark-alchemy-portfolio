@@ -20,48 +20,21 @@ const Navigation = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false); // Close mobile menu after clicking
+      setTimeout(() => setIsMobileMenuOpen(false), 600); // matches scroll duration
+
     }
   };
 
   const downloadResume = () => {
-    // Create a sample resume content - in real scenario, you'd link to actual PDF
-    const resumeContent = `
-DHRUVIK GALANI
-Full Stack Developer | Flutter | React | .NET
-
-Email: dhruvikgalaniumb0110@gmail.com
-Phone: +91 82381 45933
-Location: Umra, Velanja, Surat
-
-PROFESSIONAL SUMMARY
-Results-driven Full Stack Developer with specialization in Flutter, React.js, and .NET technologies.
-Extensive hands-on experience in building and deploying scalable, high-performance applications.
-
-EXPERIENCE
-React.js Full Stack Developer - Shashwat Technology (2025 - Present)
-WordPress Developer Intern - Shashwat Technology (2025)
-
-EDUCATION
-BSc.IT (2023-2026) - MTB campus - Shree Ramkrishna Institute
-HSC 12th - Matric Global School - 83.45%
-SSC 10th - Matric Global School - 82.33%
-
-SKILLS
-Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Problem Solving
-    `;
-
-    const blob = new Blob([resumeContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Dhruvik_Galani_Resume.txt';
+    link.href = '/Flutter_Resume.pdf'; // assumes the file is in /public
+    link.download = 'Dhruvik_Galani_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
     setIsMobileMenuOpen(false); // Close mobile menu after download
   };
+
 
   const navItems = [
     { label: 'About Me', id: 'about' },
@@ -73,16 +46,33 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
     { label: 'Contact', id: 'contact' }
   ];
 
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-black/90 backdrop-blur-md border-b border-gray-800' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter] duration-100 ease-in-out ${isScrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-transparent'
+        }`}
+
     >
+
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <motion.div
@@ -108,16 +98,18 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={downloadResume}
-              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300"
+
+            <a
+              href="/Flutter_Resume.pdf"
+              download="Dhruvik_Galani_Resume.pdf"
+              className="relative inline-flex items-center justify-center overflow-hidden px-5 py-2 text-sm font-medium text-white transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md group shadow-lg hover:shadow-pink-500/40"
             >
-              <Download className="w-4 h-4 mr-2" />
-              Resume
-            </Button>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></span>
+              <Download className="w-4 h-4 mr-2 z-10" />
+              <span className="z-10">Resume</span>
+            </a>
+
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -132,12 +124,12 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
         {/* Mobile Navigation Menu */}
         <motion.div
           initial={{ opacity: 0, height: 0 }}
-          animate={{ 
-            opacity: isMobileMenuOpen ? 1 : 0, 
-            height: isMobileMenuOpen ? 'auto' : 0 
+          animate={{
+            opacity: isMobileMenuOpen ? 1 : 0,
+            height: isMobileMenuOpen ? 'auto' : 0
           }}
           transition={{ duration: 0.3 }}
-          className="md:hidden overflow-hidden bg-black/95 rounded-lg mt-4"
+          className="md:hidden overflow-hidden bg-black/90 rounded-lg mt-4"
         >
           <div className="flex flex-col space-y-4 p-4">
             {navItems.map((item) => (
@@ -149,16 +141,18 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
                 {item.label}
               </button>
             ))}
-            
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={downloadResume}
-              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 self-start mt-4"
+
+            <a
+              href="/Flutter_Resume.pdf"
+              download="Dhruvik_Galani_Resume.pdf"
+              className="relative inline-flex items-center justify-center overflow-hidden px-5 py-2 text-sm font-medium text-white transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 rounded-md group shadow-lg hover:shadow-pink-500/40"
             >
-              <Download className="w-4 h-4 mr-2" />
-              Resume
-            </Button>
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></span>
+              <Download className="w-4 h-4 mr-2 z-10" />
+              <span className="z-10">Resume</span>
+            </a>
+
+
           </div>
         </motion.div>
       </div>
