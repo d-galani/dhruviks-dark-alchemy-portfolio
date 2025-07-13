@@ -15,20 +15,20 @@ const About = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             About Me
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
             <p className="text-xl text-gray-300 leading-relaxed mb-8">
               I am a results-driven Full Stack Developer with a specialization in Flutter, React.js, and .NET technologies. With a solid foundation in Dart programming and cross-platform mobile development, I bring extensive hands-on experience in building and deploying scalable, high-performance applications with intuitive user interfaces.
@@ -42,15 +42,15 @@ const About = () => {
 
             <div className="space-y-4">
               <div className="flex items-center space-x-3 text-gray-300">
-                <Mail className="w-5 h-5 text-emerald-400" />
+                <Mail className="w-5 h-5 text-purple-400" />
                 <span>dhruvikgalaniumb0110@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
-                <Phone className="w-5 h-5 text-emerald-400" />
+                <Phone className="w-5 h-5 text-purple-400" />
                 <span>+91 82381 45933</span>
               </div>
               <div className="flex items-center space-x-3 text-gray-300">
-                <MapPin className="w-5 h-5 text-emerald-400" />
+                <MapPin className="w-5 h-5 text-purple-400" />
                 <span>Umra, Velanja, Surat</span>
               </div>
             </div>
@@ -59,12 +59,12 @@ const About = () => {
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             className="space-y-6"
           >
             <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-emerald-400">
+                <CardTitle className="flex items-center space-x-2 text-purple-400">
                   <GraduationCap className="w-5 h-5" />
                   <span>Education</span>
                 </CardTitle>
@@ -87,7 +87,7 @@ const About = () => {
 
             <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-emerald-400">Skills</CardTitle>
+                <CardTitle className="text-purple-400">Skills</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-3">
@@ -96,8 +96,8 @@ const About = () => {
                       key={skill}
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 rounded-full text-emerald-400 text-sm"
+                      transition={{ delay: index * 0.05 }}
+                      className="px-3 py-1 bg-purple-500/20 border border-purple-400/30 rounded-full text-purple-400 text-sm"
                     >
                       {skill}
                     </motion.span>

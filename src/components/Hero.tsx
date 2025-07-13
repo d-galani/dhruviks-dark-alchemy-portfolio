@@ -26,7 +26,7 @@ const Hero = () => {
       } else {
         clearInterval(timer);
       }
-    }, 100);
+    }, 80);
     
     return () => clearInterval(timer);
   }, []);
@@ -45,13 +45,13 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
-      {/* iOS-style gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-purple-900/20" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
+      {/* Darker gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800" />
       
       {/* Floating particles with purple theme */}
       <div className="absolute inset-0">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-purple-400 rounded-full"
@@ -61,11 +61,11 @@ const Hero = () => {
               opacity: 0
             }}
             animate={{
-              opacity: [0, 0.8, 0],
+              opacity: [0, 0.6, 0],
               scale: [0, 1, 0]
             }}
             transition={{
-              duration: Math.random() * 2 + 3,
+              duration: Math.random() * 2 + 2,
               repeat: Infinity,
               delay: Math.random() * 2
             }}
@@ -87,7 +87,7 @@ const Hero = () => {
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ 
-            duration: 1.2, 
+            duration: 1, 
             type: "spring", 
             stiffness: 100,
             damping: 15
@@ -98,12 +98,12 @@ const Hero = () => {
             <motion.div 
               className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
               animate={{ 
-                scale: [1, 1.05, 1],
+                scale: [1, 1.02, 1],
                 rotate: [0, 360]
               }}
               transition={{
-                scale: { duration: 2, repeat: Infinity },
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" }
+                scale: { duration: 3, repeat: Infinity },
+                rotate: { duration: 25, repeat: Infinity, ease: "linear" }
               }}
             />
             <img
@@ -118,8 +118,8 @@ const Hero = () => {
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ 
-            delay: 0.5, 
-            duration: 0.8,
+            delay: 0.3, 
+            duration: 0.6,
             type: "spring",
             stiffness: 100
           }}
@@ -138,8 +138,8 @@ const Hero = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ 
-            delay: 1, 
-            duration: 0.8,
+            delay: 0.6, 
+            duration: 0.6,
             type: "spring",
             stiffness: 80
           }}
@@ -155,8 +155,8 @@ const Hero = () => {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ 
-            delay: 1.5, 
-            duration: 0.8,
+            delay: 0.9, 
+            duration: 0.6,
             type: "spring",
             stiffness: 60
           }}
