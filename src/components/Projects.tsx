@@ -35,10 +35,10 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
             React Projects
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -51,9 +51,9 @@ const Projects = () => {
               whileHover={{ y: -10, scale: 1.02 }}
               className="group"
             >
-              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 h-full">
+              <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300 h-full hover:border-emerald-400/50">
                 <CardHeader>
-                  <CardTitle className="text-xl text-white group-hover:text-cyan-400 transition-colors">
+                  <CardTitle className="text-xl text-white group-hover:text-emerald-400 transition-colors">
                     {project.title}
                   </CardTitle>
                 </CardHeader>
@@ -64,7 +64,7 @@ const Projects = () => {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-blue-400 text-xs"
+                        className="px-2 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded text-emerald-400 text-xs"
                       >
                         {tech}
                       </span>
@@ -74,7 +74,7 @@ const Projects = () => {
                   <div className="flex space-x-3 pt-4">
                     <Button
                       size="sm"
-                      className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0"
+                      className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white border-0"
                       onClick={() => window.open(project.liveUrl, '_blank')}
                     >
                       <ExternalLink className="w-4 h-4 mr-2" />

@@ -9,14 +9,14 @@ const Experience = () => {
       title: 'React.js Full Stack Developer',
       company: 'Shashwat Technology',
       period: '2024 - Present',
-      description: 'Developing full-stack applications using React.js, Node.js, and modern web technologies. Working on various client projects and contributing to the development of scalable web applications.',
+      description: 'Contributing to end-to-end application development and integration using React.js, Node.js, and modern web technologies. Working on scalable web applications and delivering high-performance solutions for various client projects.',
       technologies: ['React.js', 'Node.js', 'JavaScript', 'MongoDB', 'Express.js']
     },
     {
       title: 'WordPress Developer Intern',
       company: 'Web Development Agency',
       period: '2023',
-      description: 'Gained hands-on experience in WordPress development, theme customization, and plugin development. Worked on multiple client websites and learned best practices in web development.',
+      description: 'Gained hands-on experience in WordPress development, theme customization, and plugin development. Worked on multiple client websites and learned best practices in web development and content management systems.',
       technologies: ['WordPress', 'PHP', 'HTML', 'CSS', 'JavaScript']
     }
   ];
@@ -30,10 +30,10 @@ const Experience = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
             Experience
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto" />
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
@@ -45,12 +45,12 @@ const Experience = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="mb-8"
             >
-              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300">
+              <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300 hover:border-emerald-400/50">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle className="text-xl text-white mb-2">{exp.title}</CardTitle>
-                      <p className="text-cyan-400 font-semibold">{exp.company}</p>
+                      <p className="text-emerald-400 font-semibold">{exp.company}</p>
                     </div>
                     <div className="flex items-center space-x-2 text-gray-400">
                       <Calendar className="w-4 h-4" />
@@ -64,7 +64,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-blue-400 text-xs"
+                        className="px-2 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded text-emerald-400 text-xs"
                       >
                         {tech}
                       </span>
