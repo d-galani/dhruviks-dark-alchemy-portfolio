@@ -45,13 +45,13 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
-      {/* Darker gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-36 pb-20">
+      {/* Lighter gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black" />
       
-      {/* Floating particles with purple theme */}
+      {/* Enhanced floating particles with purple theme */}
       <div className="absolute inset-0">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-purple-400 rounded-full"
@@ -61,13 +61,22 @@ const Hero = () => {
               opacity: 0
             }}
             animate={{
-              opacity: [0, 0.6, 0],
-              scale: [0, 1, 0]
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0],
+              x: [
+                Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
+                Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000)
+              ],
+              y: [
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000),
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1000)
+              ]
             }}
             transition={{
-              duration: Math.random() * 2 + 2,
+              duration: Math.random() * 3 + 2,
               repeat: Infinity,
-              delay: Math.random() * 2
+              delay: Math.random() * 2,
+              ease: "easeInOut"
             }}
           />
         ))}
@@ -106,10 +115,12 @@ const Hero = () => {
                 rotate: { duration: 25, repeat: Infinity, ease: "linear" }
               }}
             />
+            {/* Dark overlay on profile pic */}
+            <div className="absolute inset-0 rounded-full bg-black/20 z-10" />
             <img
               src="/lovable-uploads/fb3e353d-aeb1-4af3-9791-8a8d19c786b4.png"
               alt="Dhruvik Galani"
-              className="relative w-60 h-60 rounded-full object-cover border-4 border-white/20 shadow-2xl mx-auto mt-2 hover:shadow-purple-500/50 transition-shadow duration-300"
+              className="relative w-60 h-60 rounded-full object-cover border-4 border-white/20 shadow-2xl mx-auto mt-2 hover:shadow-purple-500/50 transition-shadow duration-300 z-20"
             />
           </div>
         </motion.div>
@@ -125,11 +136,12 @@ const Hero = () => {
           }}
           className="text-6xl md:text-8xl font-bold mb-6"
         >
-          <span className="bg-gradient-to-r from-white via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          {/* Dark shade on name text */}
+          <span className="bg-gradient-to-r from-gray-300 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-lg">
             DHRUVIK
           </span>
           <br />
-          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-white bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-gray-300 bg-clip-text text-transparent drop-shadow-lg">
             GALANI
           </span>
         </motion.h1>

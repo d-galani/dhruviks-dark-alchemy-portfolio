@@ -1,11 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download } from 'lucide-react';
+import { Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,7 @@ const Navigation = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false); // Close mobile menu after clicking
     }
   };
 
@@ -37,8 +39,8 @@ Results-driven Full Stack Developer with specialization in Flutter, React.js, an
 Extensive hands-on experience in building and deploying scalable, high-performance applications.
 
 EXPERIENCE
-React.js Full Stack Developer - Shashwat Technology (2024 - Present)
-WordPress Developer Intern - Web Development Agency (2023)
+React.js Full Stack Developer - Shashwat Technology (2025 - Present)
+WordPress Developer Intern - Shashwat Technology (2025)
 
 EDUCATION
 BSc.IT (2023-2026) - MTB campus - Shree Ramkrishna Institute
@@ -58,6 +60,7 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
     link.click();
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
+    setIsMobileMenuOpen(false); // Close mobile menu after download
   };
 
   const navItems = [
@@ -85,11 +88,12 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent"
+            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
           >
             Dhruvik Galani
           </motion.div>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <motion.button
@@ -98,10 +102,10 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 hover:text-emerald-400 transition-colors duration-300 relative group"
+                className="text-gray-300 hover:text-purple-400 transition-colors duration-300 relative group"
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
             
@@ -109,13 +113,54 @@ Dart, Flutter, React.js, .NET, GitHub, WordPress, APIs, State Management, Proble
               variant="outline"
               size="sm"
               onClick={downloadResume}
-              className="border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-black transition-all duration-300"
+              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300"
             >
               <Download className="w-4 h-4 mr-2" />
               Resume
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-300 hover:text-purple-400 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ 
+            opacity: isMobileMenuOpen ? 1 : 0, 
+            height: isMobileMenuOpen ? 'auto' : 0 
+          }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden overflow-hidden bg-black/95 rounded-lg mt-4"
+        >
+          <div className="flex flex-col space-y-4 p-4">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-gray-300 hover:text-purple-400 transition-colors duration-300 text-left py-2"
+              >
+                {item.label}
+              </button>
+            ))}
+            
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={downloadResume}
+              className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 self-start mt-4"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Resume
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </motion.nav>
   );

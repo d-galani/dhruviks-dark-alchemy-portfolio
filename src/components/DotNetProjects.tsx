@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Github, Database } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -13,6 +13,13 @@ const DotNetProjects = () => {
       technologies: ['.NET', 'C#', 'SQL Server', 'Windows Forms', 'Entity Framework']
     }
   ];
+
+  // .NET logo SVG component
+  const DotNetLogo = () => (
+    <svg className="w-12 h-12 text-purple-400" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 8.77h-2.468v7.565h-1.425V8.77h-2.462V7.53H24zm-6.852 7.565h-4.821V7.53h4.63v1.24h-3.205v2.494h2.953v1.234h-2.953v2.604h3.396zm-6.708 0H8.882L4.78 9.863a2.896 2.896 0 0 1-.258-.51h-.036c.032.189.048.592.048 1.21v5.772H3.157V7.53h1.659l3.965 6.32c.167.261.275.442.323.54h.024c-.04-.233-.06-.629-.06-1.185V7.529h1.372zm-8.703-.693a.868.868 0 0 1-.869.693.868.868 0 0 1-.868-.693.868.868 0 0 1 .868-.692.868.868 0 0 1 .869.692z"/>
+    </svg>
+  );
 
   return (
     <section id="dotnet" className="py-20 relative">
@@ -35,7 +42,7 @@ const DotNetProjects = () => {
                 ease: "easeInOut"
               }}
             >
-              <Database className="w-12 h-12 text-purple-400" />
+              <DotNetLogo />
             </motion.div>
             <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               .NET Projects
@@ -69,7 +76,7 @@ const DotNetProjects = () => {
               <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-2xl text-white group-hover:text-purple-400 transition-colors flex items-center space-x-3">
-                    <Database className="w-6 h-6" />
+                    <DotNetLogo />
                     <span>{project.title}</span>
                   </CardTitle>
                 </CardHeader>
@@ -94,8 +101,7 @@ const DotNetProjects = () => {
                     >
                       <Button
                         size="lg"
-                        variant="outline"
-                        className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 w-full"
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 w-full"
                         onClick={() => window.open(project.githubUrl, '_blank')}
                       >
                         <Github className="w-5 h-5 mr-2" />

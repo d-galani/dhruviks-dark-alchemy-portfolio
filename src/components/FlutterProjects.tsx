@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Github, Smartphone } from 'lucide-react';
+import { Github } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -38,6 +38,13 @@ const FlutterProjects = () => {
     }
   ];
 
+  // Flutter logo SVG component
+  const FlutterLogo = () => (
+    <svg className="w-12 h-12 text-purple-400" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.37zm.159 11.871L6.857 19.487l3.716 3.716L17.557 16.22l-3.084-4.349zm-6.174 7.616L2.3 23.416l3.716-3.716 2.283 2.283z"/>
+    </svg>
+  );
+
   return (
     <section id="flutter" className="py-20 relative">
       <div className="container mx-auto px-6">
@@ -52,7 +59,7 @@ const FlutterProjects = () => {
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
             >
-              <Smartphone className="w-12 h-12 text-purple-400" />
+              <FlutterLogo />
             </motion.div>
             <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Flutter Projects
@@ -86,7 +93,7 @@ const FlutterProjects = () => {
               <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-xl text-white group-hover:text-purple-400 transition-colors flex items-center space-x-2">
-                    <Smartphone className="w-5 h-5" />
+                    <FlutterLogo />
                     <span>{project.title}</span>
                   </CardTitle>
                 </CardHeader>
@@ -111,8 +118,7 @@ const FlutterProjects = () => {
                     >
                       <Button
                         size="sm"
-                        variant="outline"
-                        className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 w-full"
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white border-0 w-full"
                         onClick={() => window.open(project.githubUrl, '_blank')}
                       >
                         <Github className="w-4 h-4 mr-2" />

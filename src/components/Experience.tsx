@@ -8,14 +8,14 @@ const Experience = () => {
     {
       title: 'React.js Full Stack Developer',
       company: 'Shashwat Technology',
-      period: '2024 - Present',
+      period: '2025 - Present',
       description: 'Contributing to end-to-end application development and integration using React.js, Node.js, and modern web technologies. Working on scalable web applications and delivering high-performance solutions for various client projects.',
       technologies: ['React.js', 'Node.js', 'JavaScript', 'MongoDB', 'Express.js']
     },
     {
       title: 'WordPress Developer Intern',
-      company: 'Web Development Agency',
-      period: '2023',
+      company: 'Shashwat Technology',
+      period: '2025',
       description: 'Gained hands-on experience in WordPress development, theme customization, and plugin development. Worked on multiple client websites and learned best practices in web development and content management systems.',
       technologies: ['WordPress', 'PHP', 'HTML', 'CSS', 'JavaScript']
     }
