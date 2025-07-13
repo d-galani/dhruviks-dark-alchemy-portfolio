@@ -20,11 +20,23 @@ const DotNetProjects = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center space-x-4 mb-4">
-            <Database className="w-12 h-12 text-purple-400" />
+            <motion.div
+              animate={{ 
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Database className="w-12 h-12 text-purple-400" />
+            </motion.div>
             <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               .NET Projects
             </h2>
@@ -38,19 +50,31 @@ const DotNetProjects = () => {
               key={index}
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02,
+                rotateX: 5,
+                rotateY: 5,
+                z: 50
+              }}
+              style={{ transformStyle: "preserve-3d" }}
               className="group"
             >
-              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300">
+              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 flex flex-col">
                 <CardHeader>
                   <CardTitle className="text-2xl text-white group-hover:text-purple-400 transition-colors flex items-center space-x-3">
                     <Database className="w-6 h-6" />
                     <span>{project.title}</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <p className="text-gray-300 text-lg">{project.description}</p>
+                <CardContent className="space-y-6 flex flex-col flex-grow">
+                  <p className="text-gray-300 text-lg flex-grow">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-3">
                     {project.technologies.map((tech, techIndex) => (
@@ -63,16 +87,21 @@ const DotNetProjects = () => {
                     ))}
                   </div>
 
-                  <div className="pt-4">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300"
-                      onClick={() => window.open(project.githubUrl, '_blank')}
+                  <div className="pt-4 mt-auto">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Github className="w-5 h-5 mr-2" />
-                      View Code
-                    </Button>
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 w-full"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                      >
+                        <Github className="w-5 h-5 mr-2" />
+                        View Code
+                      </Button>
+                    </motion.div>
                   </div>
                 </CardContent>
               </Card>

@@ -44,16 +44,21 @@ const FlutterProjects = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center space-x-4 mb-4">
-            <Smartphone className="w-12 h-12 text-blue-400" />
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            >
+              <Smartphone className="w-12 h-12 text-purple-400" />
+            </motion.div>
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Flutter Projects
             </h2>
           </div>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -62,41 +67,58 @@ const FlutterProjects = () => {
               key={index}
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02,
+                rotateX: 5,
+                rotateY: 5,
+                z: 50
+              }}
+              style={{ transformStyle: "preserve-3d" }}
               className="group"
             >
-              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 h-full">
+              <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300 h-full flex flex-col">
                 <CardHeader>
-                  <CardTitle className="text-xl text-white group-hover:text-cyan-400 transition-colors flex items-center space-x-2">
+                  <CardTitle className="text-xl text-white group-hover:text-purple-400 transition-colors flex items-center space-x-2">
                     <Smartphone className="w-5 h-5" />
                     <span>{project.title}</span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-gray-300">{project.description}</p>
+                <CardContent className="flex flex-col flex-grow">
+                  <p className="text-gray-300 mb-4 flex-grow">{project.description}</p>
                   
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-blue-400 text-xs"
+                        className="px-2 py-1 bg-purple-500/20 border border-purple-400/30 rounded text-purple-400 text-xs"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="pt-4">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-                      onClick={() => window.open(project.githubUrl, '_blank')}
+                  <div className="mt-auto">
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Github className="w-4 h-4 mr-2" />
-                      View Code
-                    </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 w-full"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        View Code
+                      </Button>
+                    </motion.div>
                   </div>
                 </CardContent>
               </Card>

@@ -27,13 +27,13 @@ const Experience = () => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             Experience
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto" />
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto" />
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
@@ -42,15 +42,26 @@ const Experience = () => {
               key={index}
               initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.02,
+                rotateX: 2,
+                z: 20
+              }}
+              style={{ transformStyle: "preserve-3d" }}
               className="mb-8"
             >
-              <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300 hover:border-emerald-400/50">
+              <Card className="bg-gray-900/80 border-gray-700 backdrop-blur-sm hover:bg-gray-900/90 transition-all duration-300 hover:border-purple-400/50">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle className="text-xl text-white mb-2">{exp.title}</CardTitle>
-                      <p className="text-emerald-400 font-semibold">{exp.company}</p>
+                      <p className="text-purple-400 font-semibold">{exp.company}</p>
                     </div>
                     <div className="flex items-center space-x-2 text-gray-400">
                       <Calendar className="w-4 h-4" />
@@ -64,7 +75,7 @@ const Experience = () => {
                     {exp.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-2 py-1 bg-emerald-500/20 border border-emerald-400/30 rounded text-emerald-400 text-xs"
+                        className="px-2 py-1 bg-purple-500/20 border border-purple-400/30 rounded text-purple-400 text-xs"
                       >
                         {tech}
                       </span>
